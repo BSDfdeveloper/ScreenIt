@@ -1,9 +1,5 @@
 package com.screening.brisbane;
 
-/**
- * Created by Farhan on 11/26/2016.
- */
-
 import android.content.Context;
 import android.graphics.Typeface;
 
@@ -27,7 +23,6 @@ public class TypefaceUtil {
             defaultFontTypefaceField.setAccessible(true);
             defaultFontTypefaceField.set(null, customFontTypeface);
         } catch (Exception e) {
-            //Log.e("Can not set custom font " + customFontFileNameInAssets + " instead of " + defaultFontNameToOverride);
         }
     }
 }

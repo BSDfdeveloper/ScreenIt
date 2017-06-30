@@ -10,6 +10,10 @@ import com.android.volley.toolbox.Volley;
 
 import static com.android.volley.VolleyLog.TAG;
 
+/**
+ * Original Code:Created by Farhan on 11/26/2016.
+ */
+
 public class MyApplication extends Application {
 
     private static MyApplication instance;
@@ -40,9 +44,6 @@ public class MyApplication extends Application {
 
         instance = this;
         checkBoxes = new Boolean[7];
-        /*StrictMode.VmPolicy.Builder builder = new StrictMode.VmPolicy.Builder();
-        StrictMode.setVmPolicy(builder.build());*/
-
     }
 
     public RequestQueue getRequestQueue() {

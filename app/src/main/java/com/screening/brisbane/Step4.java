@@ -50,7 +50,6 @@ public class Step4 extends StepsBase {
             MyApplication.getInstance().position = ((EditText) findViewById(R.id.position)).getText().toString();
             MyApplication.getInstance().date = ((EditText) findViewById(R.id.date)).getText().toString();
 
-
             Intent signatureActivity = new Intent(this, PDFActivity.class);
             startActivity(signatureActivity);
         }
@@ -66,7 +65,6 @@ public class Step4 extends StepsBase {
 
     public void showDatePickerDialog() {
         DialogFragment newFragment = new DatePickerFragment();
-        //newFragment.show(getSupportFragmentManager(), "datePicker");
         newFragment.show(this.getFragmentManager(), "datePicker");
     }
 
@@ -89,6 +87,4 @@ public class Step4 extends StepsBase {
     public void onBackPressed() {
         super.onBackPressed();
     }
-
-
 }

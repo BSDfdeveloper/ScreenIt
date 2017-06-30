@@ -25,7 +25,6 @@ public class Step2 extends StepsBase {
                 ((RadioButton) findViewById(R.id.checkbox2)).setChecked(false);
             }
         }
-
     }
 
     public void onNextClick(View view) {

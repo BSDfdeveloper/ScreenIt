@@ -37,10 +37,6 @@ public class Step1 extends StepsBase {
             MyApplication.getInstance().ameliorants = ((EditText) findViewById(R.id.ameliorants)).getText().toString();
             if (!(((EditText) findViewById(R.id.client_email)).getText().toString().isEmpty()))
                 MyApplication.getInstance().clientEmail = ((EditText) findViewById(R.id.client_email)).getText().toString();
-
-            //MyApplication.getInstance().checkBoxes[0]=((CheckBox)findViewById(R.id.checkbox1)).isChecked();
-            //MyApplication.getInstance().checkBoxes[1]=((CheckBox)findViewById(R.id.checkbox2)).isChecked();
-
             Intent signatureActivity = new Intent(this, Step2.class);
             startActivity(signatureActivity);
         }

@@ -15,9 +15,6 @@ import org.json.JSONObject;
 import java.util.HashMap;
 import java.util.Map;
 
-/**
- * Created by Faris Jameel on 8/25/2015.
- */
 public class VolleyApiCallsManager {
 
     private static final String TAG = "VolleyApiCallsManager";
@@ -41,8 +38,6 @@ public class VolleyApiCallsManager {
                     @Override
                     public void onErrorResponse(VolleyError volleyError) {
                         apiResponse.onError(findErrorType(context, volleyError));
-
-
                     }
                 }) {
 
@@ -60,24 +55,6 @@ public class VolleyApiCallsManager {
 
     private String findErrorType(Context context, VolleyError volleyError) {
         String errorString = "Server is not Responding";
-        /*
-        if(volleyError instanceof NoConnectionError) {
-            errorString = context.getResources().getString(R.string.error_no_connection);
-        }else if (volleyError instanceof TimeoutError) {
-            errorString = context.getResources().getString(R.string.error_timeout);
-        } else if (volleyError instanceof AuthFailureError) {
-            errorString = getErrorMessage(volleyError);
-            if(errorString.equals(""))
-                errorString = context.getResources().getString(R.string.error_auth_failure);
-        } else if (volleyError instanceof ServerError) {
-            errorString = context.getResources().getString(R.string.error_auth_failure);
-        } else if (volleyError instanceof NetworkError) {
-            errorString = context.getResources().getString(R.string.error_network);
-        } else if (volleyError instanceof ParseError) {
-            errorString = context.getResources().getString(R.string.error_parser);
-        }
-        DialogManager.createSimpleDialog(context, errorString, "Error...!");
-        */
         return errorString;
     }
 
@@ -111,7 +88,6 @@ public class VolleyApiCallsManager {
         return trimmedString;
     }
 
-    //Somewhere that has access to a context
     private void displayMessage(String toastString) {
         Log.v(TAG, toastString);
     }

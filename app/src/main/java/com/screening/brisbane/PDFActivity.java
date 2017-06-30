@@ -346,34 +346,10 @@ public class PDFActivity extends StepsBase {
             startActivity(myIntent);
              */
             Log.e("PDFActivity", "openMailClient after startActivity");
-            /*
-            Intent emailIntent = new Intent(Intent.ACTION_SEND);
-            emailIntent.setType("text/plain");
-            emailIntent.putExtra(Intent.EXTRA_EMAIL, new String[]
-                    {"admin@brisbanescreening.com.au"});
-            emailIntent.putExtra(Intent.EXTRA_CC, new String[]
-                    {MyApplication.getInstance().clientEmail});
-            emailIntent.putExtra(Intent.EXTRA_SUBJECT,
-                    "Brisbane screening completed measurements");
-            emailIntent.putExtra(Intent.EXTRA_TEXT, message);
-
-            Log.i(getClass().getSimpleName(), "yoyoName1=" + Uri.parse(getFilesDir() + "/" + fileName));
-            Log.i(getClass().getSimpleName(), "yoyoName2=" + currentFilePath);
-            Log.i(getClass().getSimpleName(), "yoyoName3=" + Uri.parse(currentFilePath));
-            emailIntent.putExtra(Intent.EXTRA_STREAM, Uri.fromFile(fileToSend));
-
-            //Log.v(getClass().getSimpleName(), "sPhotoUri=" + Uri.parse("file:/"+ sPhotoFileName));
-            //emailIntent.putExtra(Intent.EXTRA_STREAM, Uri.parse("file:/"+ sPhotoFileName));
-            //emailIntent.putExtra(Intent.EXTRA_STREAM, Uri.parse(currentFilePath));
-            startActivity(Intent.createChooser(emailIntent, "Send mail..."));
-            */
-
         } catch (Exception e) {
             Log.i("yoyoexception", e.toString());
             showError(e.toString());
         }
-
-
     }
 
     public void uploadData(PdfDocument document) {
@@ -386,154 +362,12 @@ public class PDFActivity extends StepsBase {
         String pdfName = lineWithoutSpaces + "_"
                 + sdf.format(Calendar.getInstance().getTime()) + ".pdf";
 
-
         displayFileName = MyApplication.getInstance().clientName + "_" + MyApplication.getInstance().jobName + "_" + MyApplication.getInstance().date;
-
 
         savePDF(document, pdfName);
         Log.v("YoYoSuccess", "PDFActivity - success");
         openMailClient();
-
-
-        //checkExternalMedia();
-        //writeToSDFile(document,pdfName);
-
-        /*
-
-        base64PDF=getBase64PdfString(document);
-
-
-
-        try {
-            JSONObject jsonObject = new JSONObject();
-
-            jsonObject.put("client_name", MyApplication.getInstance().clientName);
-            jsonObject.put("job_name", MyApplication.getInstance().jobName);
-            jsonObject.put("quantity", MyApplication.getInstance().quantity);
-            jsonObject.put("ameliorants", MyApplication.getInstance().ameliorants);
-
-            jsonObject.put("checkbox1", MyApplication.getInstance().checkBoxes[1]);
-            jsonObject.put("checkbox2", MyApplication.getInstance().checkBoxes[2]);
-            jsonObject.put("checkbox3", MyApplication.getInstance().checkBoxes[3]);
-            jsonObject.put("checkbox4", MyApplication.getInstance().checkBoxes[4]);
-            jsonObject.put("checkbox5", MyApplication.getInstance().checkBoxes[5]);
-            jsonObject.put("checkbox6", MyApplication.getInstance().checkBoxes[6]);
-
-            jsonObject.put("registration", MyApplication.getInstance().registration);
-            jsonObject.put("measurements", MyApplication.getInstance().measurements);
-            jsonObject.put("total_volume", MyApplication.getInstance().volume);
-
-            jsonObject.put("name", MyApplication.getInstance().name);
-            jsonObject.put("postion", MyApplication.getInstance().position);
-            jsonObject.put("date_pdf", MyApplication.getInstance().date);
-
-            //jsonObject.put("pdf_base64", getBase64ImageString(MyApplication.getInstance().signature));
-            Log.v("base64pdf",base64PDF);
-            if(base64PDF!=null)
-                jsonObject.put("pdf_base64", base64PDF);
-            else
-                jsonObject.put("pdf_base64", "");
-
-            apiCall.sendApiCall(this, jsonObject, "http://xetree.com/pdf_converter/webservices.php", Request.Method.POST);
-        }
-        catch (Exception e)
-        {
-            Log.v("Exception Json",e.toString());
-        }
-        */
     }
-
-    /*
-    @Override
-    public void onSuccess(JSONObject jsonObject, String url) {
-        progressDialog.dismiss();
-
-        Log.v("YoYoSuccess", jsonObject.toString());
-
-        new EmailTask().execute("");
-
-    }
-
-    @Override
-    public void onError(String error) {
-        progressDialog.dismiss();
-        ((Button)findViewById(R.id.back_button)).setClickable(true);
-        ((Button)findViewById(R.id.next_button)).setClickable(true);
-        Log.v("YoYoSuccess", error);
-        Toast.makeText(this, "Something went wrong, please try submitting data again", Toast.LENGTH_LONG).show();
-    }
-
-    @Override
-    public void onSuccess(JSONArray jsonArray) {
-
-    }
-
-    private String sendEmail()
-    {
-        try {
-            //GMailSender sender = new GMailSender("info@xetree.com", "xetree@123");
-            String toList="alison@brisbanescreening.com.au,admin@brisbanescreening.com.au";
-            if(MyApplication.getInstance().clientEmail!=null)
-                toList=toList+","+MyApplication.getInstance().clientEmail;
-            //GMailSender sender = new GMailSender("brisbanescreening@gmail.com", "brisbane@123");
-            GMailSender sender = new GMailSender("upwork@brisbanescreening.com.au", "googlescripts");
-            sender.addAttachment(currentFilePath,"Thanks for signing off on measurements on site today. A PDF copy of the measurements sign off form is attached for your records. If you have any queries please call us on 1300 748 388",displayFileName);
-            sender.sendMail("Thanks for Signing Off",
-                    "Thanks for signing off on measurements on site today. A PDF copy of the measurements sign off form is attached for your records. If you have any queries please call us on 1300 748 388",
-                    "brisbanescreening@gmail.com",
-                    toList);
-            return "s";
-        } catch (Exception e) {
-            Log.i("SendMail", e.getMessage(), e);
-            return "f";
-        }
-    }
-
-    private class EmailTask extends AsyncTask<String, Void, String> {
-        @Override
-        protected void onPreExecute() {
-            progressDialog = ProgressDialog.show(PDFActivity.this, "", "Sending Email...");
-        }
-
-        @Override
-        protected String doInBackground(String... params) {
-
-            return sendEmail();
-        }
-
-        @Override
-        protected void onPostExecute(String result) {
-            progressDialog.dismiss();
-
-            AlertDialog alertDialog = new AlertDialog.Builder(PDFActivity.this).create();
-            alertDialog.setTitle("Data Submission");
-            alertDialog.setMessage("Data succesfully submitted to server with a confirmation email...");
-            alertDialog.setButton(AlertDialog.BUTTON_POSITIVE, "HOME",
-                    new DialogInterface.OnClickListener() {
-                        public void onClick(DialogInterface dialog, int which) {
-                            dialog.dismiss();
-                            Intent intent = new Intent(PDFActivity.this, MainActivity.class);
-                            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
-                            startActivity(intent);
-                            finish();
-                        }
-                    });
-            alertDialog.setCancelable(false);
-            alertDialog.show();
-
-            if(result.equals("s")) {
-                //Toast.makeText(PDFActivity.this, "Email Sent Successfully...", Toast.LENGTH_LONG).show();
-            }
-            else
-            {
-                //Toast.makeText(PDFActivity.this, "Something went wrong, while sending email", Toast.LENGTH_LONG).show();
-            }
-        }
-
-        @Override
-        protected void onProgressUpdate(Void... values) {}
-    }
-    */
 
     private long sizeOfMyBitmap(Bitmap data) {
         if (Build.VERSION.SDK_INT < Build.VERSION_CODES.HONEYCOMB_MR1) {

@@ -57,5 +57,4 @@
             android:windowSoftInputMode="adjustPan"></activity>
         <activity android:name=".Step31"></activity>
     </application>
-
 </manifest>

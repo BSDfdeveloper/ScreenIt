@@ -14,23 +14,6 @@ public class Step31 extends StepsBase {
         setContentView(R.layout.activity_step31);
     }
 
-    /*
-    public void onCheckBoxClick(View view)
-    {
-        if(view.getId()==R.id.checkbox4) {
-            if (((CheckBox) findViewById(R.id.checkbox4)).isChecked()) {
-                ((CheckBox) findViewById(R.id.checkbox6)).setChecked(false);
-            }
-        }
-        else
-        {
-            if (((CheckBox) findViewById(R.id.checkbox6)).isChecked()) {
-                ((CheckBox) findViewById(R.id.checkbox4)).setChecked(false);
-            }
-        }
-    }
-    */
-
     public void onNextClick(View view) {
         if (!(((CheckBox) findViewById(R.id.checkbox1)).isChecked()) || !(((CheckBox) findViewById(R.id.checkbox5)).isChecked()))
             Toast.makeText(this, "These items are all compulsory", Toast.LENGTH_LONG).show();

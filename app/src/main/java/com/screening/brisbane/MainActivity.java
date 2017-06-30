@@ -16,8 +16,5 @@ public class MainActivity extends AppCompatActivity {
     public void onNextClick(View view) {
         Intent signatureActivity = new Intent(this, Step1.class);
         startActivity(signatureActivity);
-        /*
-        startActivity(Intent.createChooser(signatureActivity, "Your title"));
-         */
     }
 }
