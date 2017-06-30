@@ -1,0 +1,207 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/activity_step2"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/activityBackground"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    tools:context="com.screening.brisbane.Step2">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="60dp">
+
+        <RelativeLayout
+            android:id="@+id/Edit_Views"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <RadioButton
+                android:id="@+id/checkbox2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15dp"
+                android:onClick="onCheckBoxClick"
+                android:text="I have been given the opportunity to take my own measurements of the twin steer tip truck reg# 263 VCE. I agree that the measurements for the bin are: 6.25m (L) x 2.27m (W) x 1m (H) which equals a total volume of 14.1875m3."
+                android:textSize="15dp" />
+
+            <RelativeLayout
+                android:id="@+id/center_view"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/checkbox2"
+                android:layout_gravity="center_vertical|center_horizontal"
+                android:layout_marginTop="20dp">
+
+                <View
+                    android:layout_width="wrap_content"
+                    android:layout_height="1dp"
+                    android:layout_centerVertical="true"
+                    android:layout_marginRight="20dp"
+                    android:layout_toRightOf="@+id/orText"
+                    android:background="@color/colorPrimaryDark" />
+
+                <TextView
+                    android:id="@+id/orText"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentTop="true"
+                    android:layout_centerHorizontal="true"
+                    android:text="  OR  "
+                    android:textSize="20dp" />
+
+                <View
+                    android:layout_width="wrap_content"
+                    android:layout_height="1dp"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="20dp"
+                    android:layout_toLeftOf="@+id/orText"
+                    android:background="@color/colorPrimaryDark" />
+            </RelativeLayout>
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/center_view"
+                android:layout_marginTop="20dp"
+                android:background="@drawable/border"
+                android:orientation="vertical">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="10dp"
+                    android:orientation="vertical">
+
+                    <RadioButton
+                        android:id="@+id/checkbox3"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="5dp"
+                        android:onClick="onCheckBoxClick"
+                        android:text="I have been given the opportunity to do test measurements using another truck reg # __(1)__. I agree that the measurements for the bin are: __(3)__ which equals a total volume of: __(2)__."
+                        android:textSize="15dp" />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="15dp"
+                        android:orientation="horizontal">
+
+                        <android.support.design.widget.TextInputLayout
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1">
+
+                            <EditText
+                                android:id="@+id/registration_number"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:fontFamily="sans-serif"
+                                android:hint="(1) Registration #..."
+                                android:inputType="text"
+                                android:lines="1"
+                                android:textSize="15dp" />
+                        </android.support.design.widget.TextInputLayout>
+
+                        <android.support.design.widget.TextInputLayout
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1">
+
+                            <EditText
+                                android:id="@+id/total_volume"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="5dp"
+                                android:fontFamily="sans-serif"
+                                android:hint="(2) Total Volume..."
+                                android:inputType="numberDecimal"
+                                android:lines="1"
+                                android:textSize="15dp" />
+                        </android.support.design.widget.TextInputLayout>
+
+                    </LinearLayout>
+
+
+                    <android.support.design.widget.TextInputLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                        <EditText
+                            android:id="@+id/measurements"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="5dp"
+                            android:fontFamily="sans-serif"
+                            android:hint="(3) Measurements for the bin..."
+                            android:inputType="text"
+                            android:lines="1"
+                            android:textSize="15dp" />
+                    </android.support.design.widget.TextInputLayout>
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <!--
+              <CheckBox
+                  android:layout_marginTop="10dp"
+                  android:id="@+id/checkbox4"
+                  android:layout_width="match_parent"
+                  android:layout_height="wrap_content"
+                  android:textSize="15dp"
+                  android:text="I have been given the opportunity to view up to three test measurements and I am satisfied that the measurements accurately reflect an uncompacted meterage rate."
+                  />
+              <CheckBox
+                  android:layout_marginTop="10dp"
+                  android:id="@+id/checkbox6"
+                  android:layout_width="match_parent"
+                  android:layout_height="wrap_content"
+                  android:textSize="15dp"
+                  android:text="It was too wet to safely do test measurements but I am satisfied that the measurements are accurate."
+                  />
+              -->
+
+        </RelativeLayout>
+    </ScrollView>
+
+
+    <LinearLayout
+        android:id="@+id/buttons_container"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/back_button"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="5dp"
+            android:layout_marginRight="5dp"
+            android:layout_weight="1"
+            android:background="@drawable/button_drawable"
+            android:onClick="onPrevClick"
+            android:text="BACK" />
+
+        <Button
+            android:id="@+id/next_button"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="5dp"
+            android:layout_marginRight="5dp"
+            android:layout_weight="1"
+            android:background="@drawable/button_drawable"
+            android:onClick="onNextClick"
+            android:text="NEXT" />
+    </LinearLayout>
+
+</RelativeLayout>
