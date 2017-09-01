@@ -1,4 +1,4 @@
-package com.screening.brisbane;
+package com.cyclers.soil;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -20,9 +20,7 @@ public class Step31 extends StepsBase {
         else {
 
             MyApplication.getInstance().checkBoxes[1] = ((CheckBox) findViewById(R.id.checkbox1)).isChecked();
-            //MyApplication.getInstance().checkBoxes[4] = ((CheckBox) findViewById(R.id.checkbox4)).isChecked();
             MyApplication.getInstance().checkBoxes[5] = ((CheckBox) findViewById(R.id.checkbox5)).isChecked();
-            //MyApplication.getInstance().checkBoxes[6] = ((CheckBox) findViewById(R.id.checkbox6)).isChecked();
 
             Intent signatureActivity = new Intent(this, Step4.class);
             startActivity(signatureActivity);

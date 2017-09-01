@@ -1,4 +1,4 @@
-package com.screening.brisbane;
+package com.cyclers.soil;
 
 import android.app.ProgressDialog;
 import android.content.ComponentName;
@@ -21,7 +21,6 @@ import android.text.style.UnderlineSpan;
 import android.util.Base64;
 import android.util.Log;
 import android.view.View;
-import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -143,27 +142,31 @@ public class PDFActivity extends StepsBase {
 
     private void savePDF(PdfDocument doc, String imageName) {
 
-
+        Log.i("imageName: ", imageName);
         String f1 = imageName + ".pdf";
-        String f2 = imageName + "2.pdf";
+        String f2 = imageName + "_signed.pdf";
 
         File filepath = Environment.getExternalStorageDirectory();
-        File dir = new File(filepath.getAbsolutePath() + "/Brisbanescreening/");
-        dir.mkdirs();
+        File dir = new File(filepath.getAbsolutePath() + "/SoilCyclers/");
+        Boolean md = dir.mkdirs();
+        if (md = true) {
+            Log.i("DIR: SoilCyclers: ", "SUCCESS");
+        } else {
+            Log.i("DIR: SoilCyclers: ", "FAILED");
+        }
+        Log.i("fullPathofPDF", filepath.getAbsolutePath() + "/SoilCyclers/");
         fileToSend = new File(dir, f1);
         fileToSend2 = new File(dir, f2);
 
 
         try {
-
+            Log.i("FileOutputStream", fileToSend.getPath());
+            Log.i("FileOutputStream2", fileToSend2.getPath());
             OutputStream output = new FileOutputStream(fileToSend);
             doc.writeTo(output);
 
             currentFilePath = fileToSend.getAbsolutePath();
             fileName = imageName;
-            //fileToSend=file;
-            //fileToSend.setR(true,false);
-            //bitmap.compress(Bitmap.CompressFormat.JPEG, 100, output);
 
             output.flush();
             output.close();
@@ -184,22 +187,12 @@ public class PDFActivity extends StepsBase {
                 stamper.setFullCompression();
                 stamper.close();
 
-                /*
-                PdfWriter writer = stamper.getWriter();
-                writer.setPdfVersion(PdfWriter.PDF_VERSION_1_5);
-                writer.setCompressionLevel(PdfStream.BEST_COMPRESSION);
-                writer.close();
-                writer.setFullCompression();
-                */
-
             } catch (DocumentException e) {
                 // TODO Auto-generated catch block
                 e.printStackTrace();
                 Log.i("compression error", e.toString());
                 showError(e.toString());
-
             }
-
 
         } catch (Exception e) {
             e.printStackTrace();
@@ -219,8 +212,8 @@ public class PDFActivity extends StepsBase {
     }
 
     public void onNextClick(View view) {
-        ((Button) findViewById(R.id.back_button)).setClickable(false);
-        ((Button) findViewById(R.id.next_button)).setClickable(false);
+        findViewById(R.id.back_button).setClickable(false);
+        findViewById(R.id.next_button).setClickable(false);
 
         Log.e("yoyo", "PDF activity - onNextClick(View view)");
         final PdfDocument document = new PdfDocument();
@@ -243,37 +236,6 @@ public class PDFActivity extends StepsBase {
         } else {
             showError("This app requires storage permission to function smoothly. Please enable storage permission from settings and try again.");
         }
-
-
-        /*
-
-            AlertDialog alertDialog = new AlertDialog.Builder(this).create();
-            alertDialog.setTitle("Data Submission");
-            alertDialog.setMessage("You are about to send data to server, after this you will not be able to modify the submitted data.");
-            alertDialog.setButton(AlertDialog.BUTTON_POSITIVE, "CONFIRM",
-                    new DialogInterface.OnClickListener() {
-                        public void onClick(DialogInterface dialog, int which) {
-                            dialog.dismiss();
-                            progressDialog = ProgressDialog.show(PDFActivity.this, "", "Uploading Data...");
-                            uploadData(document);
-                            //new EmailTask().execute("");
-
-                        }
-                    });
-            alertDialog.setButton(AlertDialog.BUTTON_NEGATIVE, "CANCEL",
-                    new DialogInterface.OnClickListener() {
-                        public void onClick(DialogInterface dialog, int which) {
-                            dialog.dismiss();
-                            ((Button)findViewById(R.id.back_button)).setClickable(true);
-                            ((Button)findViewById(R.id.next_button)).setClickable(true);
-                        }
-                    });
-            alertDialog.setCancelable(false);
-            alertDialog.show();
-
-            */
-
-
     }
 
     private void addViews() {
@@ -309,7 +271,7 @@ public class PDFActivity extends StepsBase {
         try {
             String message = "Dear " + MyApplication.getInstance().clientName + "\n\n";
             message = message + "Please find attached completed measurements sign-off form. If you have any queries please give us a call on 1300 748 388. \n\n";
-            message = message + "Regards,\nBrisbane Screening";
+            message = message + "Regards,\n\nSoil Cyclers";
 
 
             Intent myIntent = new Intent(Intent.ACTION_SEND);
@@ -318,8 +280,15 @@ public class PDFActivity extends StepsBase {
             Intent tempIntent = new Intent(Intent.ACTION_SEND);
             tempIntent.setType("*/*");
             List<ResolveInfo> resInfo = pm.queryIntentActivities(tempIntent, 0);
+
             for (int i = 0; i < resInfo.size(); i++) {
                 ResolveInfo ri = resInfo.get(i);
+                Log.e(">>>PDFActivity", ri.activityInfo.packageName.toString());
+                /* droid 5 emu gives the below and doesn't progress to mail send. GMAIL not on device
+                E/>>>PDFActivity: com.android.mms
+                E/>>>PDFActivity: com.android.email
+                E/>>>PDFActivity: com.google.android.apps.maps
+                 */
                 if (ri.activityInfo.packageName.contains("android.gm")) {
                     myIntent.setComponent(new ComponentName(ri.activityInfo.packageName, ri.activityInfo.name));
                     myIntent.setAction(Intent.ACTION_SEND);
@@ -327,20 +296,21 @@ public class PDFActivity extends StepsBase {
                     myIntent.putExtra(Intent.EXTRA_EMAIL, new String[]
                             {MyApplication.getInstance().clientEmail});
                     myIntent.putExtra(Intent.EXTRA_CC, new String[]
-                            {"admin@brisbanescreening.com.au"});
+                            {"admin@soilcyclers.com.au"});
                     myIntent.putExtra(Intent.EXTRA_SUBJECT,
-                            "Brisbane screening completed measurements");
+                            "Soil Cyclers completed measurements");
                     myIntent.putExtra(Intent.EXTRA_TEXT, message);
-
+/*
                     Log.i(getClass().getSimpleName(), "yoyoName1=" + Uri.parse(getFilesDir() + "/" + fileName));
                     Log.i(getClass().getSimpleName(), "yoyoName2=" + currentFilePath);
                     Log.i(getClass().getSimpleName(), "yoyoName3=" + Uri.parse(currentFilePath));
+                    */
                     Log.e("PDFActivity", Uri.fromFile(fileToSend2).toString());
                     myIntent.putExtra(Intent.EXTRA_STREAM, Uri.fromFile(fileToSend2));
                 }
             }
             Log.e("PDFActivity", "openMailClient before startActivity");
-            startActivity(Intent.createChooser(myIntent, "Your title"));
+            startActivity(Intent.createChooser(myIntent, "Preparing to send"));
             /*
             LINE ABOVE is a quick HACK and needs to be replaced entirely with correct method
             startActivity(myIntent);
@@ -356,16 +326,15 @@ public class PDFActivity extends StepsBase {
 
         Log.v("YoYoSuccess", "PDFActivity - uploadData()");
 
-        SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy_hh:mm:ss");
+        SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy_hh-mm-ss");
         String line = MyApplication.getInstance().clientName + "_" + MyApplication.getInstance().jobName;
         String lineWithoutSpaces = line.replaceAll("\\s+", "");
-        String pdfName = lineWithoutSpaces + "_"
-                + sdf.format(Calendar.getInstance().getTime()) + ".pdf";
+        String pdfName = lineWithoutSpaces + "_" + sdf.format(Calendar.getInstance().getTime());// + ".pdf";
 
         displayFileName = MyApplication.getInstance().clientName + "_" + MyApplication.getInstance().jobName + "_" + MyApplication.getInstance().date;
 
         savePDF(document, pdfName);
-        Log.v("YoYoSuccess", "PDFActivity - success");
+        Log.v("YoYoSuccess", "PDFActivity - uploadData() success");
         openMailClient();
     }
 
@@ -389,7 +358,6 @@ public class PDFActivity extends StepsBase {
                 .setMessage(message)
                 .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int which) {
-                        // continue with delete
                         // continue with delete
                     }
                 })

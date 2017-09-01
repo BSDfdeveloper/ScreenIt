@@ -9,7 +9,7 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-    tools:context="com.screening.brisbane.Step2">
+    tools:context="com.cyclers.soil.Step2">
 
     <ScrollView
         android:layout_width="match_parent"
@@ -28,7 +28,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="15dp"
                 android:onClick="onCheckBoxClick"
-                android:text="I have been given the opportunity to take my own measurements of the twin steer tip truck reg# 263 VCE. I agree that the measurements for the bin are: 6.25m (L) x 2.27m (W) x 1m (H) which equals a total volume of 14.1875m3."
+                android:text="I have been given the opportunity to take my own measurements of the twin steer tip truck reg# 924 XKF. I agree that the measurements for the bin are: 2.28 (W) x 4.28 (L) x 1m (H) (excluding hoist which is inside the bin)  which equals a total volume of 9.75m3."
                 android:textSize="15dp" />
 
             <RelativeLayout

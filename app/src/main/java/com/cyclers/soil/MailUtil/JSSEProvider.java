@@ -1,8 +1,12 @@
-package com.screening.brisbane.MailUtil;
+package com.cyclers.soil.MailUtil;
 
 /**
  * Created by Farhan on 11/27/2016.
  *
+ * @author Alexander Y. Kleymenov
+ * @version $Revision$
+ * @author Alexander Y. Kleymenov
+ * @version $Revision$
  * @author Alexander Y. Kleymenov
  * @version $Revision$
  * @author Alexander Y. Kleymenov

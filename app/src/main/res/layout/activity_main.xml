@@ -9,7 +9,7 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-    tools:context="com.screening.brisbane.MainActivity">
+    tools:context="com.cyclers.soil.MainActivity">
 
 
     <TextView
@@ -18,6 +18,7 @@
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
         android:layout_centerVertical="true"
+        android:layout_marginTop="28dp"
         android:text="Customer Sign-Off"
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:textSize="25dp"
@@ -29,7 +30,7 @@
         android:layout_height="wrap_content"
         android:layout_above="@id/bold_text"
         android:layout_centerHorizontal="true"
-        android:src="@drawable/bs_logo_white" />
+        android:src="@drawable/sc_logo_white" />
 
     <TextView
         android:id="@+id/normal_text"

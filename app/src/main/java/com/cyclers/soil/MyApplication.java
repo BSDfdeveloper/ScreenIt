@@ -1,7 +1,8 @@
-package com.screening.brisbane;
+package com.cyclers.soil;
 
 import android.app.Application;
 import android.graphics.Bitmap;
+import android.os.StrictMode;
 import android.text.TextUtils;
 
 import com.android.volley.Request;
@@ -38,10 +39,19 @@ public class MyApplication extends Application {
 
     @Override
     public void onCreate() {
+
+        //file uri exposure issue
+        if (android.os.Build.VERSION.SDK_INT >= 24) {
+            try {
+                java.lang.reflect.Method m = StrictMode.class.getMethod("disableDeathOnFileUriExposure");
+                m.invoke(null);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
         super.onCreate();
 
         TypefaceUtil.overrideFont(getApplicationContext(), "SERIF", "fonts/calibril.ttf");
-
         instance = this;
         checkBoxes = new Boolean[7];
     }
